@@ -1,0 +1,11 @@
+{# Template #}
+    {% extends 'template.twig.html' %}
+{# Macros #}
+    {% import '__global/elements.twig.html' as elements %}
+{# Blocks #}
+    {%block body %}
+    <div class="innerContent">
+        {{ elements.button('example') }}
+        {{ elements.button('example-2', 'secondary') }}
+    </div>
+    {% endblock body %}

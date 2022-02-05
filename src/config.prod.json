@@ -1,0 +1,13 @@
+{
+  "template": {
+    "directory": "templates",
+    "dataPath": "data/templates",
+    "baseUrl": "http://localhost:9000"
+  },
+  "persistence": {
+    "type": "file",
+    "file": {
+      "path": "data/persistence.ser"
+    }
+  }
+}

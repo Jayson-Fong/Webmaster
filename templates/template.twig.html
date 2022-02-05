@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{{ __templateData.page.title }}{% endblock title %}</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="x-ua-compatible" content="IE=edge" />
+        <meta name="description" content="{{ __templateData.page.description }}" />
+        <meta name="keywords" content="{{ __templateData.page.keywords }}" />
+        <meta name="author" content="{{ __templateData.page.author }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        {% block extraHead %}{% endblock extraHead %}
+    </head>
+    <body>
+        <div id="page-container">
+            <header>
+                {%block header %}{{ include('__global/header.twig.html') }}{% endblock header %}
+            </header>
+            <main>
+                {%block body %}{% endblock body %}
+            </main>
+        </div>
+        <footer>
+            {% block footer %}{{ include('__global/footer.twig.html') }}{% endblock footer %}
+        </footer>
+    </body>
+</html>

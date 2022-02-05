@@ -1,0 +1,3 @@
+{% macro button(id, color = 'primary', text = 'Button', link = '') %}
+    <a class="button" data-color="{{ color }}" id="{{ id }}" {% if link != '' %}href="{{ link }}"{% endif %}>{{ text }}</a>
+{% endmacro %}
