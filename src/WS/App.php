@@ -113,7 +113,7 @@ class App
         $configuration = $this->configuration;
         foreach ($indexes as $index)
         {
-            if (is_array($configuration) && isset($configuration[$index]))
+            if (is_array($configuration) && array_key_exists($index, $configuration))
             {
                 $configuration = $configuration[$index];
             }
