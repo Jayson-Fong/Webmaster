@@ -13,11 +13,11 @@ use WS\App;
 class Core extends AbstractExtension
 {
 
-    protected array $configuration;
+    protected App $app;
 
     public function getFunctions(): array
     {
-        $this->configuration = App::getInstance()->configuration();
+        $this->app = App::getInstance();
 
         return [
             new TwigFunction('templateDir', [$this, 'renderTemplateDir']),
@@ -33,7 +33,7 @@ class Core extends AbstractExtension
 
     public function renderAsset(string $asset, bool $keepFresh = false): string
     {
-        return sprintf('%s/assets/%s?%d', $this->configuration['template']['baseUrl'],
+        return sprintf('%s/assets/%s?%d', $this->app->getConfigurationOption('template', 'baseUrl'),
             ltrim($asset, '/'), $keepFresh ? time() : '');
     }
 
@@ -41,9 +41,9 @@ class Core extends AbstractExtension
     {
         if (empty($query))
         {
-            return sprintf('%s/%s', $this->configuration['template']['baseUrl'], ltrim($link, '/'));
+            return sprintf('%s/%s', $this->app->getConfigurationOption('template', 'baseUrl'), ltrim($link, '/'));
         }
-        return sprintf('%s/%s?', $this->configuration['template']['baseUrl'],
+        return sprintf('%s/%s?', $this->app->getConfigurationOption('template', 'baseUrl'),
             ltrim($link, '/'), http_build_query($query));
     }
 

@@ -18,8 +18,7 @@ class File extends Persistence
     {
         parent::__construct($app);
 
-        $configuration = $this->app->configuration();
-        $this->filePath = $configuration['persistence']['file']['path'];
+        $this->filePath = $this->app->getConfigurationOption('persistence', 'file', 'path');
         $fileContents = file_get_contents($this->filePath);
         if (strlen($fileContents) !== 0)
         {

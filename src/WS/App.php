@@ -108,12 +108,22 @@ class App
         });
     }
 
-    /**
-     * @return array
-     */
-    public function configuration(): array
+    public function getConfigurationOption(string... $indexes): mixed
     {
-        return $this->configuration;
+        $configuration = $this->configuration;
+        foreach ($indexes as $index)
+        {
+            if (is_array($configuration) && isset($configuration[$index]))
+            {
+                $configuration = $configuration[$index];
+            }
+            else
+            {
+                return $configuration;
+            }
+        }
+
+        return $configuration;
     }
 
     public function persistence(): Persistence
@@ -187,7 +197,7 @@ class App
         return json_decode($configurationContents, true);
     }
 
-    protected function commandRegister(Application $application, string $path, array $directoryNames = [])
+    protected function commandRegister(Application $application, string $path)
     {
         foreach (scandir($path) as $outerFile) {
             if (in_array($outerFile, ['.', '..']))

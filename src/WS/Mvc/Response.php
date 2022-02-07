@@ -109,8 +109,7 @@ class Response extends BaseInitializable
     protected function getFullParameters(): array
     {
         $parameters = $this->parameters;
-        $configuration = $this->app->configuration();
-        $dataBasePath = $configuration['template']['dataPath'];
+        $dataBasePath = $this->app->getConfigurationOption('template', 'dataPath');
 
         $templateData = array();
         foreach ($this->dataPaths as $dataPath)

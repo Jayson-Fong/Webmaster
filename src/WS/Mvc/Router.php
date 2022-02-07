@@ -11,9 +11,15 @@ use WS\BaseInitializable;
 class Router extends BaseInitializable
 {
 
+    /**
+     * @todo Change controllers to be in a different path & namespace
+     * @param Route $route
+     * @return Response
+     */
     public function process(Route $route): Response
     {
-        $path = strlen($route->getCleanRoutePath()) === 0 ? 'Index' : $route->getCleanRoutePath();
+        $path = $route->getCleanRoutePath();
+        $path = $path ?: 'Index';
 
         $actionPosition = strrpos($path, '/');
         if($actionPosition !== false) {
