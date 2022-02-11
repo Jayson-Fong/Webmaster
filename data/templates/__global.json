@@ -1,8 +1,9 @@
 {
+  "serviceName": "Party",
   "page": {
     "title": "Party",
-    "description": "Stuff",
-    "keywords": "Stuff",
+    "description": "Party in the Dark",
+    "keywords": "Party,Dark,Concert",
     "author": "Jayson Fong"
   }
 }

@@ -1,0 +1,15 @@
+{# Template #}
+{% extends 'template.twig.html' %}
+{# Macros #}
+{% import '__global/elements.twig.html' as elements %}
+{# Blocks #}
+{%block body %}
+    <div class="innerContent">
+        <h2 data-location="center">Login to {{ __templateData.serviceName }}</h2>
+        <form id="login" class="floating-box" data-location="center" data-style="box" data-size="half">
+            <label for="email">Email</label><input type="email" name="email" id="email" placeholder="Email" data-style="box" data-color="primary" data-location="center" data-size="three-quarters" />
+            <label for="password">Password</label><input type="password" name="password" id="password" placeholder="Password" data-style="box" data-color="primary" data-location="center" data-size="three-quarters" />
+            <input type="submit" data-style="box" data-color="secondary" data-size="half" data-location="center" />
+        </form>
+    </div>
+{% endblock body %}

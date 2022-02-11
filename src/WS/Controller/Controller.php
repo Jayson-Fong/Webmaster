@@ -19,9 +19,17 @@ abstract class Controller extends BaseInitializable
         return $this->app->buildResponse();
     }
 
-    public function assetIsPost()
+    public function assertIsPost()
     {
         if ($this->app->request()->get(Request::SERVER, 'REQUEST_METHOD') !== 'POST')
+        {
+            throw new InvalidRequestException();
+        }
+    }
+
+    public function assertIsGet()
+    {
+        if ($this->app->request()->get(Request::SERVER, 'REQUEST_METHOD') !== 'GET')
         {
             throw new InvalidRequestException();
         }

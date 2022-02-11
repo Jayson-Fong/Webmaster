@@ -2,6 +2,7 @@
 
 namespace WS\Mvc;
 
+use Exception;
 use WS\BaseInitializable;
 
 /**
@@ -22,30 +23,40 @@ class Router extends BaseInitializable
         $path = $path ?: 'Index';
 
         $actionPosition = strrpos($path, '/');
-        if($actionPosition !== false) {
+        if ($actionPosition !== false) {
             $action = substr($path, $actionPosition + 1);
             $path = substr($path, 0, $actionPosition);
-        }
-        else
-        {
-            $action = 'index';
+        } else {
+            $action = 'Index';
         }
 
-        if (class_exists('WS\Controller\\' . $path, false))
-        {
-            $controller = new ('WS\Controller\\' . $path)($this->app);
+        $loaded = false;
+        $controller = null;
+        try {
+            if (@class_exists('WS\Controller\\' . $path, true)) {
+                $controller = new ('WS\Controller\\' . $path)($this->app);
+                $loaded = true;
+            }
+        } catch (Exception) {
+            $loaded = false;
         }
-        else
-        {
+
+        if (!$loaded) {
             $controller = new ('WS\Controller\Index')($this->app);
         }
 
-        if(method_exists($controller, $action))
-        {
-            $action = 'index';
+        if (!method_exists($controller, $action)) {
+            $action = 'Index';
         }
 
-        return call_user_func(array($controller, 'action' . $action));
+        try
+        {
+            return call_user_func(array($controller, 'action' . $action));
+        }
+        catch (Exception)
+        {
+            return $this->app->buildResponse();
+        }
     }
 
 }
